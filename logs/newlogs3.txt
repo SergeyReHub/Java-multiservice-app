@@ -1,0 +1,6 @@
+
+2025-10-06T19:30:00 ERROR 500 "Connection failed" "Failed to connect to database: timeout after 30s"
+2025-10-06T19:31:15 WARN 404 "Not found" "Resource /api/users/123 not found"
+2025-10-06T19:32:45 INFO 200 "Success" "User login successful"
+2025-10-06T19:33:22 ERROR 400 "Invalid input" "Missing required field: email"
+2025-10-06T19:35:10 DEBUG 200 "Cache hit" "Retrieved user profile from cache"

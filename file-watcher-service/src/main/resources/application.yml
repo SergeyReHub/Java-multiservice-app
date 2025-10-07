@@ -1,0 +1,24 @@
+# Kafka Configuration
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+    properties:
+      # Logging settings (optional, can be removed in production)
+      log4j:
+        logger:
+          org.apache.kafka: ERROR
+          kafka: ERROR
+
+app:
+  watch:
+    directory: ./logs  # Directory to watch for file changes
+    patterns: ENTRY_CREATE  # Only process new files to avoid duplicates
+    processed-files: /app/processed-files/  # Directory to track processed files
+  kafka:
+    bootstrap-servers: kafka:9092 # Kafka broker address
+    topic: logs  # Default Kafka topic to send messages to

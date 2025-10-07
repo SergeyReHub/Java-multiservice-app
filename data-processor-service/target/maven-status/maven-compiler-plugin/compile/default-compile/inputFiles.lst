@@ -1,0 +1,13 @@
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/kafka_consumer/ConsumerImpl.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/grpc_client/LogsSenderImpl.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/config/KafkaConfig.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/mapper_grpc/LogMapper.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/Main.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/config/AppProperties.java
+/home/sergey/Programming/Java/fileController/data-processor-service/target/generated-sources/protobuf/grpc-java/com/file_processor/grpc_client/LogsSenderGrpc.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/file_processor/FileProcesorImpl.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/Models/Log.java
+/home/sergey/Programming/Java/fileController/data-processor-service/target/generated-sources/protobuf/java/com/file_processor/grpc_client/SenderService.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/grpc_client/LogsSender.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/kafka_consumer/Consumer.java
+/home/sergey/Programming/Java/fileController/data-processor-service/src/main/java/com/file_processor/file_processor/FileProcessor.java

@@ -1,0 +1,28 @@
+# Kafka Configuration
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      properties:
+        # Enable debug logging for producer
+        debug: "producer"
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      consumer:
+        properties:
+          # Enable debug logging for consumer
+          debug: "consumer"
+      listener:
+        # Log any listener errors
+        log-container-config: true
+
+# Application Configuration
+app:
+  watch:
+    directory: ../logs  # Directory to watch for file changes
+    patterns: ENTRY_CREATE,ENTRY_MODIFY  # Comma-separated list of events to watch (ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)
+  kafka:
+    bootstrap-servers: localhost:9092 # Kafka broker address
+    topic: logs  # Default Kafka topic to send messages to

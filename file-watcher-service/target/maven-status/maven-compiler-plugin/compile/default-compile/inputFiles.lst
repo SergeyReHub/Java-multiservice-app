@@ -1,0 +1,7 @@
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/Main.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/service/FileWatcherServiceImpl.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/config/AppProperties.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/kafka_producer/Producer.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/service/FileWatcherService.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/config/KafkaConfig.java
+/home/sergey/Programming/Java/fileController/file-watcher-service/src/main/java/com/file_watcher/kafka_producer/ProducerImpl.java

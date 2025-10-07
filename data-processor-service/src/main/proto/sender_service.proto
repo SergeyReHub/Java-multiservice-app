@@ -1,0 +1,17 @@
+syntax = "proto3";
+package com.file_processor.grpc_client;
+
+import "google/protobuf/empty.proto";
+
+service LogsSender {
+  // Client streams Log messages; server replies with Empty once completed
+  rpc SendLogs (stream Log) returns (google.protobuf.Empty);
+}
+
+message Log {
+  string date = 1;
+  string message = 2;
+  string level = 3;
+  int32 statusCode = 4;
+  string error = 5;
+}

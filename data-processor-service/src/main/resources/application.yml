@@ -1,0 +1,25 @@
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: data-processor-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+logging:
+  level:
+    com.file_processor: DEBUG
+
+grpc:
+  client:
+    logs-sender:
+      address: static://api-gateway:9090
+      negotiation-type: plaintext
+
+# Application Configuration
+app:
+  kafka:
+    bootstrap-servers: kafka:9092
+    topic: logs  # Default Kafka topic to send messages to

@@ -1,0 +1,22 @@
+grpc:
+  server:
+    port: 9090
+
+logging:
+  level:
+    com.gateway: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/LogsDatabase
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+app:
+  rd-conf:
+    hostname: redis
+    port: 6379
