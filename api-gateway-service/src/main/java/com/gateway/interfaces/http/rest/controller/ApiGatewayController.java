@@ -9,6 +9,7 @@ import com.gateway.interfaces.http.rest.dto.GetLogsResponse;
 import com.gateway.interfaces.http.rest.mapper.LogMapper;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,16 @@ public class ApiGatewayController {
     public ResponseEntity<List<GetLogsResponse>> getLogsByStatus5xx() {
         List<Log> logs = apiGatewayService.findAll5xx();
         return ResponseEntity.ok(logs.stream().map(logMapper::toGetLogsResponse).collect(Collectors.toList()));
+    }
+
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Log deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Log not found")
+    })
+    @DeleteMapping("logs/delete_by_id/{id}")
+    public ResponseEntity<String> deleteLogById(@PathVariable String id) {
+        apiGatewayService.deleteLogById(id);
+        return ResponseEntity.ok("Log deleted successfully");
     }
 
 //    @PostMapping("/logs")

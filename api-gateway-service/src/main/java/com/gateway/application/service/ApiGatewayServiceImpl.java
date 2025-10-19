@@ -9,13 +9,11 @@ import com.gateway.infrastructure.persistence.postgres.specification.LogSpecific
 import com.gateway.interfaces.http.rest.mapper.LogMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -81,8 +79,15 @@ public class ApiGatewayServiceImpl implements ApiGatewayService {
 
 
     @Override
+    @Transactional
     public boolean deleteLogById(String id) {
-        return false;
+        boolean wasDeleted = logRepository.deleteLogById(id) > 0;
+        if (wasDeleted) {
+            logRedisRepository.deleteById(id);
+        } else {
+            throw new EmptyResultDataAccessException(1);
+        }
+        return true;
     }
 
 }

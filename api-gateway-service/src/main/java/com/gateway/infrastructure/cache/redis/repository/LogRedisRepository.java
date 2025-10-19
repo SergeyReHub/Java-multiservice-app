@@ -7,8 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
-public interface LogRedisRepository  {
+public interface LogRedisRepository {
     void save(LogRedisEntity redisEntity);
+
     List<LogRedisEntity> findByStatusCodeGreaterThanEqual(int statusCode);
+
+    void deleteById(String id);
 }
 

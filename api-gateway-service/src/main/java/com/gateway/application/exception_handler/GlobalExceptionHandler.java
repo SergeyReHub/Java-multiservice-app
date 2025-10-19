@@ -3,6 +3,7 @@ package com.gateway.application.exception_handler;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -75,6 +76,27 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<ErrorResponseDto> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request, HttpServletRequest httpRequest) {
+        String requestedId = extractIdFromPath(httpRequest.getRequestURI());
+        Map<String, String> details = Map.of(
+                "entity", "Log", // or extract from exception message
+                "reason", "Entity not found in database",
+                "requested_id", requestedId, // if you're looking up by ID
+                "request_method", httpRequest.getMethod(),
+                "request_uri", httpRequest.getRequestURI(),
+                "detailed_problem", ex.getMessage()
+        );
+        ErrorResponseDto error = new ErrorResponseDto(
+                "Entity not found",
+                404,
+                LocalDateTime.now(),
+                request.getDescription(false),
+                details
+        );
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 
     private String extractIdFromPath(String requestUri) {
         try {
@@ -85,5 +107,6 @@ public class GlobalExceptionHandler {
             return "unknown";
         }
     }
+
 
 }

@@ -35,6 +35,11 @@ public class LogRedisRepositoryImpl implements LogRedisRepository {
     public void saveAll(List<LogRedisEntity> logs) {
         logs.forEach(this::save);
     }
+
+    @Override
+    public void deleteById(String id) {
+        redisTemplate.opsForZSet().remove(LOGS_KEY, id);
+    }
 }
 
 // refill the repository using cutom class that using
