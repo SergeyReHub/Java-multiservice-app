@@ -7,11 +7,10 @@ import java.util.Map;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
-public class ErrorResponse {
-    private String errorCode;
-    private String message;
+public class ErrorResponseDto {
+    private String error;
     private int status;
     private LocalDateTime timestamp;
     private String path;

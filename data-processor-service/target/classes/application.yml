@@ -1,24 +1,58 @@
+---
+# Common configuration for all profiles
 spring:
+  config:
+    activate:
+      on-profile: default
   kafka:
-    bootstrap-servers: localhost:9092
     consumer:
-      group-id: group1
+      group-id: data-processor-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-  
+
 logging:
   level:
     com.file_processor: DEBUG
+
+
+
+---
+# Docker profile (activated with -Dspring.profiles.active=docker)
+spring:
+  config:
+    activate:
+      on-profile: docker
+  kafka:
+    bootstrap-servers: kafka:9092
+
+app:
+  kafka:
+    bootstrap-servers: kafka:9092
+    topic: logs
+
+grpc:
+  client:
+    logs-sender:
+      address: static://api-gateway:9090
+      negotiation-type: plaintext
+
+---
+# Local development profile (default)
+spring:
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    bootstrap-servers: localhost:29092
+
+app:
+  kafka:
+    topic: logs
+    bootstrap-servers: localhost:29092
 
 grpc:
   client:
     logs-sender:
       address: static://localhost:9090
       negotiation-type: plaintext
-
-# Application Configuration
-app:
-  kafka:
-    bootstrap-servers: localhost:9092
-    topic: logs  # Default Kafka topic to send messages to

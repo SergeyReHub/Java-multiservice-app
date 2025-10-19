@@ -1,6 +1,9 @@
-grpc:
-  server:
-    port: 9090
+---
+# Common configuration for all profiles
+spring:
+  config:
+    activate:
+      on-profile: default
 
 logging:
   level:
@@ -8,15 +11,46 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
+---
+# Docker profile (activated with -Dspring.profiles.active=docker)
 spring:
+  config:
+    activate:
+      on-profile: docker
+  
   datasource:
     url: jdbc:postgresql://postgres:5432/LogsDatabase
-    username: admin
+    username: postgres
     password: admin
-  jpa:
-    hibernate:
-      ddl-auto: update
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
 app:
   rd-conf:
     hostname: redis
     port: 6379
+
+---
+# Local development profile (default)
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/LogsDatabase
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app:
+  rd-conf:
+    hostname: localhost
+    port: 6379
+
+grpc:
+  server:
+    port: 9090

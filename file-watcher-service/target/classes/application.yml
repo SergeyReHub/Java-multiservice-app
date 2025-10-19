@@ -1,28 +1,55 @@
-# Kafka Configuration
+---
+# Common configuration for all profiles
 spring:
+  config:
+    activate:
+      on-profile: default
   kafka:
-    bootstrap-servers: localhost:9092
     producer:
-      properties:
-        # Enable debug logging for producer
-        debug: "producer"
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       acks: all
       retries: 3
-      consumer:
-        properties:
-          # Enable debug logging for consumer
-          debug: "consumer"
-      listener:
-        # Log any listener errors
-        log-container-config: true
+    properties:
+      log4j:
+        logger:
+          org.apache.kafka: ERROR
+          kafka: ERROR
 
-# Application Configuration
+---
+# Docker profile (activated with -Dspring.profiles.active=docker)
+spring:
+  config:
+    activate:
+      on-profile: docker
+  kafka:
+    bootstrap-servers: kafka:9092
+
 app:
   watch:
-    directory: ../logs  # Directory to watch for file changes
-    patterns: ENTRY_CREATE,ENTRY_MODIFY  # Comma-separated list of events to watch (ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)
+    directory: ./logs
+    patterns: ENTRY_CREATE
+    processed-files: /app/processed-files/
   kafka:
-    bootstrap-servers: localhost:9092 # Kafka broker address
-    topic: logs  # Default Kafka topic to send messages to
+    topic: logs
+    bootstrap-servers: kafka:9092
+
+---
+# Local development profile (default)
+spring:
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    bootstrap-servers: localhost:29092
+
+
+
+app:
+  watch:
+    directory: ./logs
+    patterns: ENTRY_CREATE
+    processed-files: /app/processed-files/
+  kafka:
+    topic: logs
+    bootstrap-servers: localhost:29092

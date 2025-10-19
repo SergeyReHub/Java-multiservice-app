@@ -1,6 +1,7 @@
 package com.gateway.infrastructure.cache.redis.repository;
 
 import com.gateway.infrastructure.cache.redis.entity.LogRedisEntity;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;

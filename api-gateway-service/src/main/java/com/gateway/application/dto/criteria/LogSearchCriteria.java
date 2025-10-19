@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class LogSearchCriteria {
+    private String id;
     private String date;
     private String message;
     private String level;

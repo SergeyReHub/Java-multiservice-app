@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Log{
+public class Log {
+    private String id;
     private LocalDateTime date;
     private String message;
     private String level;

@@ -71,8 +71,8 @@ services:
     volumes:
       - ./logs:/app/logs
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      APP_WATCH_DIRECTORY: /app/logs
+      - SPRING_PROFILES_ACTIVE=docker
+      - APP_WATCH_DIRECTORY=/app/logs
     restart: unless-stopped
 
   data-processor:
@@ -81,14 +81,16 @@ services:
       kafka:
         condition: service_healthy
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL: PLAINTEXT
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL=PLAINTEXT
     restart: unless-stopped
 
   api-gateway:
     build: ./api-gateway-service
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       redis:
         condition: service_healthy

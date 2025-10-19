@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-06T18:41:15+0300",
+    date = "2025-10-15T13:28:04+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.8 (Ubuntu)"
 )
 @Component
@@ -26,6 +26,7 @@ public class LogMapperImpl implements LogMapper {
 
         Log.LogBuilder log = Log.builder();
 
+        log.id( entity.getId() );
         log.date( entity.getDate() );
         log.message( entity.getMessage() );
         log.level( entity.getLevel() );
@@ -44,6 +45,7 @@ public class LogMapperImpl implements LogMapper {
         Log.LogBuilder log = Log.builder();
 
         log.date( stringToLocalDateTime( entity.getDate() ) );
+        log.id( entity.getId() );
         log.message( entity.getMessage() );
         log.level( entity.getLevel() );
         log.statusCode( entity.getStatusCode() );
@@ -60,6 +62,7 @@ public class LogMapperImpl implements LogMapper {
 
         LogJpaEntity logJpaEntity = new LogJpaEntity();
 
+        logJpaEntity.setId( log.getId() );
         logJpaEntity.setMessage( log.getMessage() );
         logJpaEntity.setError( log.getError() );
         logJpaEntity.setStatusCode( log.getStatusCode() );
@@ -78,6 +81,7 @@ public class LogMapperImpl implements LogMapper {
         LogRedisEntity logRedisEntity = new LogRedisEntity();
 
         logRedisEntity.setDate( localDateTimeToString( log.getDate() ) );
+        logRedisEntity.setId( log.getId() );
         logRedisEntity.setMessage( log.getMessage() );
         logRedisEntity.setLevel( log.getLevel() );
         logRedisEntity.setStatusCode( log.getStatusCode() );
@@ -94,6 +98,7 @@ public class LogMapperImpl implements LogMapper {
 
         LogSearchCriteria logSearchCriteria = new LogSearchCriteria();
 
+        logSearchCriteria.setId( log.getId() );
         if ( log.getDate() != null ) {
             logSearchCriteria.setDate( DateTimeFormatter.ISO_LOCAL_DATE_TIME.format( log.getDate() ) );
         }
@@ -114,6 +119,7 @@ public class LogMapperImpl implements LogMapper {
         GetLogsResponse getLogsResponse = new GetLogsResponse();
 
         getLogsResponse.setDate( localDateTimeToString( log.getDate() ) );
+        getLogsResponse.setId( log.getId() );
         getLogsResponse.setMessage( log.getMessage() );
         getLogsResponse.setLevel( log.getLevel() );
         getLogsResponse.setStatusCode( log.getStatusCode() );

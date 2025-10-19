@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "com.file_processor.config.AppProperties",
+      "sourceType": "com.file_processor.config.AppProperties"
+    },
+    {
+      "name": "app.kafka",
+      "type": "com.file_processor.config.AppProperties$Kafka",
+      "sourceType": "com.file_processor.config.AppProperties",
+      "sourceMethod": "getKafka()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.kafka.bootstrap-servers",
+      "type": "java.lang.String",
+      "sourceType": "com.file_processor.config.AppProperties$Kafka"
+    },
+    {
+      "name": "app.kafka.topic",
+      "type": "java.lang.String",
+      "sourceType": "com.file_processor.config.AppProperties$Kafka"
+    }
+  ],
+  "hints": []
+}

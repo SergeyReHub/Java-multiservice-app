@@ -7,6 +7,9 @@ import com.gateway.interfaces.http.rest.dto.GetLogsByDateResponse;
 import com.gateway.interfaces.http.rest.dto.GetLogsRequest;
 import com.gateway.interfaces.http.rest.dto.GetLogsResponse;
 import com.gateway.interfaces.http.rest.mapper.LogMapper;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,18 +30,22 @@ public class ApiGatewayController {
     }
 
     @PostMapping("/logs/get_logs")
-    public ResponseEntity<List<GetLogsResponse>> getLogs(@RequestBody GetLogsRequest payload) {
+    public ResponseEntity<List<GetLogsResponse>> getLogs(@RequestBody @Valid GetLogsRequest payload) {
         Log logPayload = logMapper.toDomain(payload);
         List<Log> logs = apiGatewayService.getLogs(logPayload);
-        return ResponseEntity.ok(logs.stream().map(logMapper :: toGetLogsResponse).collect(Collectors.toList()));
+        return ResponseEntity.ok(logs.stream().map(logMapper::toGetLogsResponse).collect(Collectors.toList()));
     }
 
     @PostMapping("/logs/by_dates")
-    public ResponseEntity<List<GetLogsResponse>> getLogsByDates(@RequestBody GetLogsByDateRequest payload) {
+    public ResponseEntity<List<GetLogsResponse>> getLogsByDates(@RequestBody @Valid GetLogsByDateRequest payload) {
         List<Log> logs = apiGatewayService.getLogsByDates(payload.getDateTime1(), payload.getDateTime2());
-        return ResponseEntity.ok(logs.stream().map(logMapper :: toGetLogsResponse).collect(Collectors.toList()));
+        return ResponseEntity.ok(logs.stream().map(logMapper::toGetLogsResponse).collect(Collectors.toList()));
     }
 
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "ID успешно найден"),
+            @ApiResponse(responseCode = "404", description = "ID не найден")
+    })
     @GetMapping("/logs/{id}")
     public ResponseEntity<GetLogsResponse> getLogByID(@PathVariable String id) {
         Log log = apiGatewayService.getLogByID(id);

@@ -12,6 +12,7 @@
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/infrastructure/persistence/postgres/specification/LogSpecification.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/application/service/ApiGatewayService.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/interfaces/http/rest/dto/GetLogsByDateResponse.java
+/home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/application/exception_handler/exception_dto/ErrorResponseDto.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/application/service/ApiGatewayServiceImpl.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/target/generated-sources/protobuf/java/com/file_processor/grpc_client/SenderService.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/interfaces/http/rest/mapper/LogMapper.java
@@ -19,4 +20,5 @@
 /home/sergey/Programming/Java/fileController/api-gateway-service/target/generated-sources/protobuf/grpc-java/com/file_processor/grpc_client/LogsSenderGrpc.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/application/dto/criteria/LogSearchCriteria.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/interfaces/http/rest/dto/GetLogsByDateRequest.java
+/home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/application/exception_handler/GlobalExceptionHandler.java
 /home/sergey/Programming/Java/fileController/api-gateway-service/src/main/java/com/gateway/infrastructure/persistence/postgres/entity/LogJpaEntity.java
